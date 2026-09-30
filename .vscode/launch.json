@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: dev",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/kidsup_web/node_modules/.bin/next",
+      "args": ["dev"],
+      "cwd": "${workspaceFolder}/kidsup_web",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "ready started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "Next.js: build",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/kidsup_web/node_modules/.bin/next",
+      "args": ["build"],
+      "cwd": "${workspaceFolder}/kidsup_web",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Next.js: start (production)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/kidsup_web/node_modules/.bin/next",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/kidsup_web",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "ready started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "openExternally"
+      }
+    }
+  ]
+}
