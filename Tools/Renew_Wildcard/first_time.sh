@@ -6,11 +6,13 @@
 #   1. Domena kids-up.pl musi mieć nameservery ustawione na DigitalOcean DNS
 #      (tak jak zozoland.pl i eazbee.com) — inaczej DNS-01 (--dns dns_dgon)
 #      nie zadziała. Sprawdź/dodaj domenę w DO Panel → Networking → Domains.
-#   2. Podmień DO_API_KEY poniżej na realny token (DO Panel → API →
-#      Personal access tokens → Write).
+#   2. Skopiuj .do-token.sh.example do .do-token.sh (w tym samym folderze)
+#      i wklej tam realny token (DO Panel → API → Personal access tokens →
+#      Write). .do-token.sh jest w .gitignore — nigdy nie trafia do gita.
 set -e
 
 DOMAIN="kids-up.pl"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # 1. Zainstaluj acme.sh (jeśli jeszcze nie ma)
 if [ ! -f "$HOME/.acme.sh/acme.sh" ]; then
@@ -22,8 +24,14 @@ fi
 # 2. Ustaw Let's Encrypt jako domyślne CA
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 
-# 3. DigitalOcean API token (z DO Panel → API → Personal access tokens → Write)
-export DO_API_KEY="dop_..."
+# 3. DigitalOcean API token — wczytywany z lokalnego, niewersjonowanego pliku
+if [ -f "$SCRIPT_DIR/.do-token.sh" ]; then
+  source "$SCRIPT_DIR/.do-token.sh"
+fi
+if [ -z "$DO_API_KEY" ]; then
+  echo "❌ Brak DO_API_KEY. Skopiuj .do-token.sh.example do .do-token.sh i wklej token."
+  exit 1
+fi
 
 # 4. Wystawiamy certyfikat wildcard przez DNS-01 challenge (DigitalOcean)
 echo "=== Wystawiam certyfikat dla $DOMAIN i *.$DOMAIN ==="

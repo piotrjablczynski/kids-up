@@ -14,12 +14,16 @@ CERT_DIR="$HOME/.acme.sh/${DOMAIN}_ecc"
 CERT_FILE="$CERT_DIR/fullchain.cer"
 KEY_FILE="$CERT_DIR/${DOMAIN}.key"
 CA_FILE="$CERT_DIR/ca.cer"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Gdzie skopiować gotowe certyfikaty (kopia zapasowa poza acme.sh)
 OUT_DIR="/opt/certs/kids-up.pl"
 
-# DigitalOcean API token — wymagany tylko przy faktycznym odnowieniu
-export DO_API_KEY="dop_..."
+# DigitalOcean API token — wymagany tylko przy faktycznym odnowieniu,
+# wczytywany z lokalnego, niewersjonowanego pliku (patrz .do-token.sh.example)
+if [ -f "$SCRIPT_DIR/.do-token.sh" ]; then
+  source "$SCRIPT_DIR/.do-token.sh"
+fi
 
 # ─── Sprawdź czy cert istnieje ───────────────────────────────────────────────
 

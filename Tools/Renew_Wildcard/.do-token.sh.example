@@ -1,0 +1,4 @@
+#!/bin/bash
+# Skopiuj ten plik do .do-token.sh (bez .example) i wklej realny token.
+# .do-token.sh jest w .gitignore — nigdy nie trafi do gita/GitHuba.
+export DO_API_KEY="dop_v1_wklej_tutaj_swoj_token"

@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Lokalny, prawdziwy token DO — patrz Tools/Renew_Wildcard/.do-token.sh.example
+Tools/Renew_Wildcard/.do-token.sh
