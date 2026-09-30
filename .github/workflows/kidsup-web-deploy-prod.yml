@@ -1,0 +1,58 @@
+name: Kids Up Web Deploy Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Run number z "Kids Up Web Deploy" (sam numer, np. 12)'
+        required: true
+        type: string
+
+env:
+  REGISTRY: registry.digitalocean.com
+  IMAGE: eazbeecr/kidsupweb
+
+jobs:
+
+  deploy-prod:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    environment: Production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_K8S_TOKEN }}
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save eazbeeaks
+
+      - name: Deploy manifests
+        env:
+          TAG: prod-${{ inputs.tag }}
+          NAMESPACE: prod
+          DOMAIN: kids-up.pl
+        run: |
+          TMP=$(mktemp -d)
+          cp kidsup_web/manifests/deployment.yml  "$TMP/"
+          cp kidsup_web/manifests/service.yml     "$TMP/"
+          cp kidsup_web/manifests/ingress.yml     "$TMP/"
+          cp kidsup_web/manifests/ingress-www.yml "$TMP/"
+
+          for f in "$TMP/deployment.yml" "$TMP/service.yml" "$TMP/ingress.yml"; do
+            sed -i "s/\${NAMESPACE}/$NAMESPACE/g" "$f"
+            sed -i "s/\${DOMAIN}/$DOMAIN/g"       "$f"
+            sed -i "s/__TAG__/$TAG/g"             "$f"
+          done
+
+          kubectl apply -f "$TMP/service.yml"     -n $NAMESPACE
+          kubectl apply -f "$TMP/ingress.yml"     -n $NAMESPACE
+          kubectl apply -f "$TMP/ingress-www.yml" -n $NAMESPACE
+          kubectl apply -f "$TMP/deployment.yml"  -n $NAMESPACE
+          kubectl rollout status deployment/kidsupweb -n $NAMESPACE --timeout=180s

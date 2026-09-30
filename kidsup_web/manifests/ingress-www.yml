@@ -1,0 +1,30 @@
+# Permanent redirect: www.kids-up.pl → kids-up.pl
+# Wdrażane TYLKO na prod (patrz kidsup-web-deploy-prod.yml).
+# TLS dla www pokryte tym samym wildcard sekretem (*.kids-up.pl) — kids-up-tls.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kidsupweb-www-redirect
+  namespace: prod
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      return 301 https://kids-up.pl$request_uri;
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - www.kids-up.pl
+    secretName: kids-up-tls
+  rules:
+  - host: www.kids-up.pl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kidsupweb
+            port:
+              number: 80

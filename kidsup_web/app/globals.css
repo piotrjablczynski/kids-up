@@ -1,0 +1,271 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─── Kids Up Brand Tokens ───────────────────────────────────── */
+:root {
+  /* shadcn/ui CSS vars (HSL triplets — no hsl() wrapper) */
+  --background: 0 0% 100%;
+  --foreground: 213 27% 23%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 213 27% 23%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 213 27% 23%;
+
+  /* Primary = brand blue (chłopiec z logo) */
+  --primary: 207 79% 51%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary = brand pink/magenta (dziewczynka z logo, napis "Up") */
+  --secondary: 333 82% 52%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 213 20% 96%;
+  --muted-foreground: 213 10% 45%;
+
+  /* Accent = brand amber (gwiazda z logo) */
+  --accent: 38 100% 58%;
+  --accent-foreground: 213 27% 23%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 213 20% 90%;
+  --input: 213 20% 90%;
+  --ring: 207 79% 51%;
+
+  --radius: 1.25rem;
+
+  /* Kids Up brand palette (z logo) */
+  --brand-blue: #1e88e5;
+  --brand-cyan: #29b6f6;
+  --brand-green: #7cb342;
+  --brand-orange: #ffa726;
+  --brand-pink: #ec1e6b;
+  --brand-purple: #8e44ad;
+  --dark: #313d4b;
+  --surface: #f6f8fc;
+}
+
+/* ─── Tailwind v4 theme tokens ───────────────────────────────── */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Brand colors as Tailwind utilities */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-green: var(--brand-green);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-purple: var(--brand-purple);
+  --color-dark: var(--dark);
+  --color-surface: var(--surface);
+
+  --font-sans: var(--font-nunito), "Nunito", "Segoe UI", sans-serif;
+  --font-heading: var(--font-baloo), "Baloo 2", var(--font-nunito), sans-serif;
+
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+}
+
+/* ─── Base styles ────────────────────────────────────────────── */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+/* ─── Utility classes ────────────────────────────────────────── */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.container-site {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--brand-blue);
+  color: white;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 20px -6px rgba(30, 136, 229, 0.5);
+}
+.btn-primary:hover {
+  background-color: #1670bd;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(30, 136, 229, 0.55);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--brand-pink);
+  color: white;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 20px -6px rgba(236, 30, 107, 0.45);
+}
+.btn-secondary:hover {
+  background-color: #c8155a;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(236, 30, 107, 0.5);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  color: var(--dark);
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  transition: border-color 0.2s, transform 0.15s;
+}
+.btn-outline:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  transform: translateY(-2px);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 38rem;
+}
+
+.card-hover {
+  transition: box-shadow 0.25s, transform 0.2s;
+}
+.card-hover:hover {
+  box-shadow: 0 16px 40px rgba(30, 41, 59, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Colorful section divider, jak w Zozolandzie ale w palecie Kids Up */
+.color-bar {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--brand-blue) 0%,
+    var(--brand-cyan) 25%,
+    var(--brand-green) 50%,
+    var(--brand-orange) 75%,
+    var(--brand-pink) 100%
+  );
+}
+
+/* Organic blob shape for hero/decorative backgrounds */
+.blob-shape {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+/* Typography for markdown-rendered body content (remark-html output) */
+.prose-content {
+  color: #475569;
+  line-height: 1.8;
+}
+.prose-content h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-content h3 {
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.prose-content p {
+  margin-bottom: 1.1rem;
+}
+.prose-content ul,
+.prose-content ol {
+  margin-bottom: 1.1rem;
+  padding-left: 1.4rem;
+}
+.prose-content ul {
+  list-style: disc;
+}
+.prose-content ol {
+  list-style: decimal;
+}
+.prose-content li {
+  margin-bottom: 0.4rem;
+}
+.prose-content a {
+  color: var(--brand-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-content strong {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* Soft category badge */
+.badge-soft {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}

@@ -1,0 +1,72 @@
+KIDS UP — LISTA ZDJĘĆ DO WYGENEROWANIA (GPT / DALL-E)
+======================================================
+
+Logo i favicon (logo.png, og-default.png, app/icon.png, app/apple-icon.png)
+są już gotowe — wygenerowane automatycznie z /Users/piotrjablczynski/Kids-Up/Logo/Logo.png.
+Poniżej TYLKO zdjęcia, które trzeba jeszcze wygenerować i wgrać.
+
+Styl wspólny dla wszystkich zdjęć (dopisz do każdego promptu, jeśli model
+tego nie utrzyma automatycznie): ciepłe, naturalne światło, nowoczesna,
+przytulna przestrzeń gabinetu terapeutycznego, kolory zbliżone do palety
+marki (niebieski, cyan, zieleń, pomarańcz, róż — ale stonowane, nie
+neonowe), realistyczna fotografia (nie ilustracja, nie kreskówka), różnorodni
+ludzie, żadnych widocznych napisów/loga w kadrze, format poziomy 3:2 lub 4:3
+chyba że zaznaczono inaczej.
+
+--------------------------------------------------------------------
+1. Plik: public/images/hero-dzieci.jpg
+   Gdzie: strona główna, sekcja hero (największe, najważniejsze zdjęcie)
+   Wymiar: poziomy, min. 1400×1100 px
+
+   PROMPT (PL):
+   "Profesjonalne zdjęcie w nowoczesnym, jasnym gabinecie terapii dla dzieci.
+   Dwoje uśmiechniętych dzieci w wieku przedszkolnym (chłopiec i dziewczynka)
+   bawi się kolorowymi klockami sensorycznymi i miękkimi elementami na
+   podłodze, w tle rozmyta, przyjazna terapeutka klęcząca obok i obserwująca
+   z uśmiechem. Ciepłe, naturalne światło z dużego okna, pastelowe, ale
+   żywe kolory (niebieski, turkusowy, pomarańczowy). Realistyczna fotografia,
+   styl lifestyle/edytorialny, płytka głębia ostrości, radosna, bezpieczna
+   atmosfera. Bez napisów, bez logo."
+
+--------------------------------------------------------------------
+2. Plik: public/images/o-nas-zespol.jpg
+   Gdzie: strona główna, sekcja "Poznaj nas" (teaser zespołu) oraz może
+   posłużyć też na /o-nas
+   Wymiar: poziomy, min. 1400×1050 px
+
+   PROMPT (PL):
+   "Profesjonalne, ciepłe zdjęcie grupowe 3-4 uśmiechniętych specjalistów
+   (zróżnicowanych wiekowo i płciowo) w nowoczesnym, jasnym wnętrzu poradni
+   psychologiczno-pedagogicznej — np. psycholożka, pedagog, logopeda.
+   Stoją swobodnie, nieformalnie, w casualowych, ale eleganckich strojach,
+   uśmiechnięci, w tle jasne, przytulne wnętrze gabinetu z roślinami i
+   kolorowymi akcentami. Naturalne światło, realistyczna fotografia
+   korporacyjna/lifestyle, ciepła, budząca zaufanie atmosfera. Bez napisów,
+   bez logo, bez identyfikatorów z nazwiskami."
+
+--------------------------------------------------------------------
+3. Plik: public/images/wwr-zajecia.jpg
+   Gdzie: podstrona /wczesne-wspomaganie-rozwoju (obok opisu WWR)
+   Wymiar: pionowy, min. 1000×1200 px (format portretowy!)
+
+   PROMPT (PL):
+   "Pionowe zdjęcie przedstawiające terapeutkę pracującą indywidualnie z
+   małym dzieckiem (ok. 2-4 lata) podczas zajęć wczesnego wspomagania
+   rozwoju — siedzą razem na podłodze na miękkim dywanie, dziecko bawi się
+   sensorycznymi zabawkami (np. kolorowe klocki, piłki sensoryczne),
+   terapeutka delikatnie asystuje i uśmiecha się do dziecka. Jasne,
+   nowoczesne wnętrze gabinetu, ciepłe naturalne światło, realistyczna
+   fotografia, czuła, spokojna atmosfera bliskości i bezpieczeństwa. Bez
+   napisów, bez logo."
+
+--------------------------------------------------------------------
+UWAGI
+- Jeśli chcesz więcej zdjęć (np. osobne dla /praca-u-nas, /kontakt albo
+  miniatury poszczególnych usług w ofercie) — daj znać, dopiszę kolejne
+  prompty w tym samym formacie (nazwa pliku + wymiar + prompt PL).
+- Wygenerowane pliki wrzuć dokładnie pod podane ścieżki
+  (kidsup_web/public/images/<nazwa>.jpg) — komponenty już na nie czekają,
+  więc podmiana zadziała od razu, bez zmian w kodzie.
+- Jeśli używasz DALL-E przez ChatGPT: poproś dodatkowo o format JPG i
+  docelowe proporcje z tabeli wyżej — model czasem domyślnie generuje
+  kwadrat.

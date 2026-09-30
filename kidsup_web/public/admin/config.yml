@@ -1,0 +1,212 @@
+# Decap CMS Configuration — Kids Up
+# Docs: https://decapcms.org/docs/
+
+backend:
+  name: github
+  repo: piotrjablczynski/kids-up
+  branch: main
+  base_url: https://sveltia-cms-auth.YOURWORKER.workers.dev  # TODO: ustaw URL OAuth proxy (np. Sveltia lub Netlify Identity)
+
+# Local development — uncomment to use local backend (npx decap-server obok npm run dev)
+# local_backend: true
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+locale: pl
+
+collections:
+  # ─── Oferta (cennik) ──────────────────────────────────────────
+  - name: oferta
+    label: Oferta / cennik
+    label_singular: Pozycja cennika
+    folder: content/oferta
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{title}} — {{price}}"
+    fields:
+      - { label: Nazwa usługi, name: title, widget: string }
+      - label: Kategoria
+        name: category
+        widget: select
+        options:
+          - { label: "Diagnoza i opiniowanie", value: diagnoza }
+          - { label: "Terapia indywidualna", value: terapia }
+          - { label: "Zajęcia grupowe", value: grupowe }
+          - { label: "Wczesne Wspomaganie Rozwoju", value: wwr }
+      - { label: Poddział (nagłówek grupy w cenniku), name: subcategory, widget: string, required: false }
+      - { label: Czas trwania, name: duration, widget: string, required: false, hint: "np. 45 min, albo 45 / 25 min" }
+      - { label: Cena, name: price, widget: string, hint: "np. 180 zł, albo 170 zł / 110 zł" }
+      - { label: Dopisek do ceny, name: priceNote, widget: string, required: false }
+      - label: Ikona
+        name: icon
+        widget: select
+        required: false
+        options: [MessageCircle, Eye, Brain, Puzzle, Zap, ClipboardList, GraduationCap, PencilRuler, Calculator, Stethoscope, Waves, Activity, Ear, HeartPulse, FileText, Hand, Heart, Sparkles, Star, Users, Smile, Baby, BookOpen]
+      - { label: Krótki opis (na kartach), name: excerpt, widget: text }
+      - { label: Usługa flagowa (wyróżniona na stronie głównej), name: featured, widget: boolean, default: false }
+      - { label: Powiązane tematy dla rodziców (slugi), name: relatedTematy, widget: list, required: false }
+      - { label: Treść (Co to jest / Dla kogo / Jak wygląda spotkanie), name: body, widget: markdown }
+
+  # ─── Dla rodziców (poradnik) ────────────────────────────────
+  - name: dla-rodzicow
+    label: Dla rodziców
+    label_singular: Temat
+    folder: content/dla-rodzicow
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{title}}"
+    fields:
+      - { label: Tytuł, name: title, widget: string }
+      - { label: Krótki opis (na kartach), name: excerpt, widget: text }
+      - label: Ikona
+        name: icon
+        widget: select
+        required: false
+        options: [MessageCircle, Eye, Brain, Puzzle, Zap, ClipboardList, GraduationCap, PencilRuler, Calculator, Stethoscope, Waves, Activity, Ear, HeartPulse, FileText, Hand, Heart, Sparkles, Star, Users, Smile, Baby, BookOpen]
+      - { label: Wyróżniony na stronie głównej, name: featured, widget: boolean, default: false }
+      - { label: Powiązane usługi z oferty (slugi), name: relatedOferta, widget: list, required: false }
+      - { label: Treść artykułu, name: body, widget: markdown }
+
+  # ─── Praca u nas (oferty pracy) ──────────────────────────────
+  - name: praca
+    label: Praca u nas
+    label_singular: Ogłoszenie
+    folder: content/praca
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    identifier_field: role
+    summary: "{{role}} — {{status}}"
+    fields:
+      - { label: Stanowisko, name: role, widget: string }
+      - label: Status
+        name: status
+        widget: select
+        options: ["Pilnie poszukiwany", "Rekrutacja otwarta", "Rekrutacja uzupełniająca"]
+        default: "Rekrutacja otwarta"
+      - { label: Dopisek (np. o formie współpracy), name: note, widget: string, required: false }
+      - { label: Treść ogłoszenia, name: body, widget: markdown }
+
+  # ─── Aktualności (na przyszłość) ─────────────────────────────
+  - name: aktualnosci
+    label: Aktualności
+    label_singular: Aktualność
+    folder: content/aktualnosci
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: Tytuł, name: title, widget: string }
+      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - { label: Skrót, name: excerpt, widget: text }
+      - { label: Zdjęcie, name: image, widget: image, required: false }
+      - { label: Treść, name: body, widget: markdown }
+
+  # ─── Strony ───────────────────────────────────────────────────
+  - name: pages
+    label: Strony
+    label_singular: Strona
+    files:
+      - label: Strona główna
+        name: home
+        file: content/pages/home.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan heroiczny, name: hero_tagline, widget: string, required: false }
+          - { label: "Hero — nagłówek", name: hero_heading, widget: string, required: false }
+          - { label: "Hero — wyróżniony fragment nagłówka", name: hero_heading_highlight, widget: string, required: false }
+          - { label: "Hero — opis", name: hero_description, widget: text, required: false }
+
+      - label: O nas
+        name: o-nas
+        file: content/pages/o-nas.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - { label: Nagłówek sekcji zespołu, name: mission_heading, widget: string, required: false }
+          - label: Zespół
+            name: team
+            widget: list
+            fields:
+              - { label: Rola, name: role, widget: string }
+              - { label: Opis, name: desc, widget: text }
+              - { label: Status, name: status, widget: select, options: ["W zespole od startu", "W trakcie rekrutacji"] }
+          - { label: Treść, name: body, widget: markdown }
+
+      - label: Wczesne Wspomaganie Rozwoju
+        name: wwr
+        file: content/pages/wczesne-wspomaganie-rozwoju.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - { label: Opis, name: hero_description, widget: text, required: false }
+          - label: Kroki
+            name: steps
+            widget: list
+            fields:
+              - { label: Numer, name: step, widget: string }
+              - { label: Tytuł, name: title, widget: string }
+              - { label: Opis, name: desc, widget: text }
+          - { label: Treść, name: body, widget: markdown }
+
+      - label: Kontakt
+        name: kontakt
+        file: content/pages/kontakt.md
+        fields:
+          - { label: Adres, name: address, widget: text }
+          - { label: Telefon, name: phone, widget: string }
+          - { label: E-mail, name: email, widget: string }
+          - { label: Godziny otwarcia, name: hours, widget: string }
+          - { label: Treść, name: body, widget: markdown, required: false }
+
+      - label: Praca u nas (intro)
+        name: praca-u-nas
+        file: content/pages/praca-u-nas.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - { label: Opis, name: hero_description, widget: text, required: false }
+          - { label: Treść, name: body, widget: markdown, required: false }
+
+      - label: Cennik (intro)
+        name: cennik
+        file: content/pages/cennik.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - { label: Opis, name: hero_description, widget: text, required: false }
+
+      - label: FAQ
+        name: faq
+        file: content/pages/faq.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - label: Pytania i odpowiedzi
+            name: faq
+            widget: list
+            fields:
+              - { label: Pytanie, name: q, widget: string }
+              - { label: Odpowiedź, name: a, widget: text }
