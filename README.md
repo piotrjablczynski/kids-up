@@ -48,10 +48,12 @@ Strona/
    ```
 
 5. **Push do `main`** uruchomi `kidsup-web-deploy.yml` — automatycznie
-   zbuduje i wdroży `test.kids-up.pl`, a dodatkowo zbuduje (ale nie wdroży)
-   obraz prod. Żeby wypchnąć na `kids-up.pl`, uruchom ręcznie workflow
+   buduje i wdraża **tylko** `test.kids-up.pl`. Nic z prod nie odpala się
+   samo. Żeby wypchnąć na `kids-up.pl`, uruchom ręcznie osobny workflow
    **Kids Up Web Deploy Production** (Actions → wybierz workflow → Run
-   workflow → podaj numer builda z poprzedniego kroku).
+   workflow → podaj numer builda testowego, który chcesz promować — ten
+   workflow sam buduje świeży obraz z ustawieniami prod i wdraża go,
+   numer służy tylko do etykiety `prod-<numer>`).
 
    `test.kids-up.pl` jest zabezpieczone hasłem (HTTP Basic Auth na
    poziomie nginx-ingress, żeby Google nigdy tego nie zaindeksował) —

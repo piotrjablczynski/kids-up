@@ -1,10 +1,16 @@
 name: Kids Up Web Deploy Production
 
+# Wyłącznie ręczne — nic tu się nie odpala samo na push. Buduje świeży obraz
+# z aktualnego "main" z ustawieniami prod (NEXT_PUBLIC_ENV=prod) i wdraża go
+# na kids-up.pl. Numer builda testowego podajesz tylko po to, żeby wynikowy
+# obraz prod-<numer> dało się skojarzyć z tym, co wcześniej sprawdziłeś na
+# test.kids-up.pl — sam build i tak dzieje się od nowa, w tym kroku.
+
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Run number z "Kids Up Web Deploy" (sam numer, np. 12)'
+        description: 'Numer builda testowego, który promujesz (tylko do etykiety obrazu prod-<numer>)'
         required: true
         type: string
 
@@ -14,13 +20,34 @@ env:
 
 jobs:
 
-  deploy-prod:
-    name: 🚀 Deploy to Production
+  build-and-deploy-prod:
+    name: 🚀 Build & Deploy to Production
     runs-on: ubuntu-latest
     environment: Production
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to DO Container Registry
+        run: |
+          echo "${{ secrets.DO_REGISTRY_TOKEN }}" \
+            | docker login registry.digitalocean.com/eazbeecr --username token --password-stdin
+
+      - name: Build and push Prod image
+        uses: docker/build-push-action@v5
+        with:
+          context: kidsup_web
+          file: kidsup_web/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE }}:prod-${{ inputs.tag }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE }}:cache-prod
+          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE }}:cache-prod,mode=max
+          build-args: |
+            NEXT_PUBLIC_ENV=prod
+            NEXT_PUBLIC_SITE_URL=https://kids-up.pl
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2

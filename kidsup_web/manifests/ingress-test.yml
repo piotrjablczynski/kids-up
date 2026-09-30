@@ -13,7 +13,9 @@ metadata:
     # ── HTTP Basic Auth (tylko test) ───────────────────────────────────────────
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: kidsup-test-basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: "Kids Up — środowisko testowe (wymagane hasło)"
+    # nginx-ingress's admission webhook validates auth-realm against a strict
+    # [a-zA-Z0-9-. ] pattern — no em-dashes, parentheses or Polish diacritics.
+    nginx.ingress.kubernetes.io/auth-realm: "Kids Up test environment"
 
     # ── HTTPS enforcement ──────────────────────────────────────────────────────
     nginx.ingress.kubernetes.io/ssl-redirect: "true"

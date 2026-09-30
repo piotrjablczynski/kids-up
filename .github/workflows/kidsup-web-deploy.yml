@@ -1,5 +1,9 @@
 name: Kids Up Web Deploy
 
+# Wyłącznie TEST — buduje i wdraża test.kids-up.pl automatycznie na push do
+# main. Nic tu nie dotyka prod ani nawet nie buduje obrazu dla prod — to
+# osobna, ręcznie uruchamiana akcja w kidsup-web-deploy-prod.yml.
+
 on:
   push:
     branches: [main]
@@ -45,38 +49,6 @@ jobs:
             NEXT_PUBLIC_SITE_URL=https://test.kids-up.pl
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # Build PROD image — kids-up.pl (built every push, promoted manually via
-  # kidsup-web-deploy-prod.yml, exactly like eazBee's own web-deploy split)
-  # ─────────────────────────────────────────────────────────────────────────────
-  build-prod:
-    name: Build & Push Prod image
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to DO Container Registry
-        run: |
-          echo "${{ secrets.DO_REGISTRY_TOKEN }}" \
-            | docker login registry.digitalocean.com/eazbeecr --username token --password-stdin
-
-      - name: Build and push Prod image
-        uses: docker/build-push-action@v5
-        with:
-          context: kidsup_web
-          file: kidsup_web/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE }}:prod-${{ github.run_number }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE }}:cache-prod
-          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE }}:cache-prod,mode=max
-          build-args: |
-            NEXT_PUBLIC_ENV=prod
-            NEXT_PUBLIC_SITE_URL=https://kids-up.pl
-
-  # ─────────────────────────────────────────────────────────────────────────────
   # Deploy to TEST — automatic, runs right after the test image is built
   # ─────────────────────────────────────────────────────────────────────────────
   deploy-test:
@@ -113,8 +85,8 @@ jobs:
           DOMAIN: test.kids-up.pl
         run: |
           TMP=$(mktemp -d)
-          cp kidsup_web/manifests/deployment.yml  "$TMP/"
-          cp kidsup_web/manifests/service.yml     "$TMP/"
+          cp kidsup_web/manifests/deployment.yml   "$TMP/"
+          cp kidsup_web/manifests/service.yml      "$TMP/"
           cp kidsup_web/manifests/ingress-test.yml "$TMP/ingress.yml"
 
           for f in "$TMP/deployment.yml" "$TMP/service.yml" "$TMP/ingress.yml"; do
