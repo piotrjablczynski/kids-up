@@ -53,6 +53,14 @@ Strona/
    **Kids Up Web Deploy Production** (Actions → wybierz workflow → Run
    workflow → podaj numer builda z poprzedniego kroku).
 
+   `test.kids-up.pl` jest zabezpieczone hasłem (HTTP Basic Auth na
+   poziomie nginx-ingress, żeby Google nigdy tego nie zaindeksował) —
+   login **`test`**, hasło **`Mopsik25810!`**. Sam sekret K8s
+   (`kidsup-test-basic-auth`) tworzy/aktualizuje automatycznie krok
+   deployu, na podstawie `kidsup_web/manifests/htpasswd-test` — nic
+   ręcznie nie trzeba zakładać. `dev` (lokalnie) i `prod` (`kids-up.pl`)
+   działają bez hasła.
+
 6. **Panel CMS (`/admin`)** wymaga jeszcze wdrożenia OAuth-proxy (np.
    Sveltia CMS na Cloudflare Workers) — `base_url` w
    `kidsup_web/public/admin/config.yml` jest na razie placeholderem. Do

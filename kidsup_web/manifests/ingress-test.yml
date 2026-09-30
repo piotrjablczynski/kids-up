@@ -1,0 +1,116 @@
+# Ingress dla test.kids-up.pl — TYLKO test. Różni się od ingress.yml (prod)
+# trzema dodatkowymi adnotacjami HTTP Basic Auth: przeglądarka dostaje 401 i
+# okno logowania zanim zobaczy jakąkolwiek treść, więc Googlebot (i każdy
+# inny crawler) nigdy nie dostanie 200 i nie zindeksuje strony testowej.
+# Sprawdzane w całości po stronie nginx-ingress, przed dotarciem requestu do
+# aplikacji — nic w kodzie Next.js tego nie sprawdza ani nie może obejść.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kidsupweb
+  namespace: ${NAMESPACE}
+  annotations:
+    # ── HTTP Basic Auth (tylko test) ───────────────────────────────────────────
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: kidsup-test-basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: "Kids Up — środowisko testowe (wymagane hasło)"
+
+    # ── HTTPS enforcement ──────────────────────────────────────────────────────
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    # ── Compression ────────────────────────────────────────────────────────────
+    nginx.ingress.kubernetes.io/enable-brotli: "true"
+    nginx.ingress.kubernetes.io/brotli-level: "6"
+    nginx.ingress.kubernetes.io/brotli-types: >-
+      text/html text/plain text/css text/xml text/javascript
+      application/javascript application/json application/xml application/xhtml+xml
+      image/svg+xml font/woff font/woff2 font/ttf application/font-woff
+
+    # ── Proxy tuning ───────────────────────────────────────────────────────────
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+    nginx.ingress.kubernetes.io/keep-alive: "75"
+    nginx.ingress.kubernetes.io/keep-alive-requests: "1000"
+
+    # ── Static asset caching at nginx ingress level ────────────────────────────
+    # Cache zone (static_assets) must already exist on the cluster (shared with
+    # eazBee/Zozoland). ${NAMESPACE} is substituted by kidsup-web-deploy.yml.
+    nginx.ingress.kubernetes.io/server-snippet: |
+      # ── Next.js content-hashed chunks — cache forever ────────────────────────
+      location ~* ^/_next/static/ {
+        proxy_pass http://kidsupweb.${NAMESPACE}.svc.cluster.local:80;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_cache             static_assets;
+        proxy_cache_key         "$host$request_uri";
+        proxy_cache_valid       200 304 365d;
+        proxy_cache_use_stale   error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_background_update on;
+        proxy_cache_lock        on;
+        proxy_cache_lock_timeout 5s;
+
+        add_header Cache-Control  "public, max-age=31536000, immutable" always;
+        add_header X-Cache-Status $upstream_cache_status                always;
+      }
+
+      # ── next/image optimisation endpoint ─────────────────────────────────────
+      location ~* ^/_next/image {
+        proxy_pass http://kidsupweb.${NAMESPACE}.svc.cluster.local:80;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_cache             static_assets;
+        proxy_cache_key         "$host$request_uri$http_accept";
+        proxy_cache_valid       200 60s;
+        proxy_cache_use_stale   error timeout updating;
+        proxy_cache_background_update on;
+
+        add_header Vary           "Accept"               always;
+        add_header X-Cache-Status $upstream_cache_status always;
+      }
+
+      # ── Public images /images/* — 24 h ───────────────────────────────────────
+      location ~* ^/images/ {
+        proxy_pass http://kidsupweb.${NAMESPACE}.svc.cluster.local:80;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_cache             static_assets;
+        proxy_cache_key         "$host$request_uri";
+        proxy_cache_valid       200 24h;
+        proxy_cache_use_stale   error timeout updating;
+        proxy_cache_background_update on;
+        proxy_ignore_headers    Cache-Control Expires;
+
+        add_header Cache-Control  "public, max-age=86400" always;
+        add_header X-Cache-Status $upstream_cache_status  always;
+      }
+
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ${DOMAIN}
+    secretName: kids-up-tls
+  rules:
+  - host: ${DOMAIN}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kidsupweb
+            port:
+              number: 80

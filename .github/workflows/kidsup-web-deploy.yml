@@ -99,6 +99,13 @@ jobs:
       - name: Save DigitalOcean kubeconfig
         run: doctl kubernetes cluster kubeconfig save eazbeeaks
 
+      - name: Create/update Basic Auth secret (blocks Google from indexing test)
+        run: |
+          kubectl create secret generic kidsup-test-basic-auth \
+            --from-file=auth=kidsup_web/manifests/htpasswd-test \
+            --namespace test \
+            --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Deploy manifests
         env:
           TAG: test-${{ github.run_number }}
@@ -106,9 +113,9 @@ jobs:
           DOMAIN: test.kids-up.pl
         run: |
           TMP=$(mktemp -d)
-          cp kidsup_web/manifests/deployment.yml "$TMP/"
-          cp kidsup_web/manifests/service.yml    "$TMP/"
-          cp kidsup_web/manifests/ingress.yml    "$TMP/"
+          cp kidsup_web/manifests/deployment.yml  "$TMP/"
+          cp kidsup_web/manifests/service.yml     "$TMP/"
+          cp kidsup_web/manifests/ingress-test.yml "$TMP/ingress.yml"
 
           for f in "$TMP/deployment.yml" "$TMP/service.yml" "$TMP/ingress.yml"; do
             sed -i "s/\${NAMESPACE}/$NAMESPACE/g" "$f"
