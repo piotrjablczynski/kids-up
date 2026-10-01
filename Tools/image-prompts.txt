@@ -1,9 +1,14 @@
-KIDS UP — LISTA ZDJĘĆ DO WYGENEROWANIA (GPT / DALL-E)
+KIDS UP — LISTA ZDJĘĆ (GPT / DALL-E)
 ======================================================
 
-Logo i favicon (logo.png, og-default.png, app/icon.png, app/apple-icon.png)
-są już gotowe — wygenerowane automatycznie z /Users/piotrjablczynski/Kids-Up/Logo/Logo.png.
-Poniżej TYLKO zdjęcia, które trzeba jeszcze wygenerować i wgrać.
+STATUS: zdjęcia 1, 2, 3 i logo/favicon są już wygenerowane i wgrane
+(public/images/hero-dzieci.jpg, o-nas-zespol.jpg, wwr-zajecia.jpg).
+Dodatkowo w użyciu jest czwarte, własne zdjęcie (bez promptu z tej listy)
+— public/images/wwr-banner.jpg, "Joyful Beanbag Playtime" — terapeutka i
+dziecko na kolorowych pufach, użyte w banerze WWR na stronie głównej.
+Poniższe prompty zostają w pliku jako dokumentacja tego, co zamówiono —
+przydadzą się, gdyby trzeba było je kiedyś wygenerować ponownie albo
+dorobić warianty.
 
 Styl wspólny dla wszystkich zdjęć (dopisz do każdego promptu, jeśli model
 tego nie utrzyma automatycznie): ciepłe, naturalne światło, nowoczesna,
