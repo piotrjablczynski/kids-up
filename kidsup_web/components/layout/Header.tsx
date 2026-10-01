@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PORADNIA } from "@/lib/poradniaInfo";
 
 const navLinks = [
   { label: "O nas", href: "/o-nas" },
@@ -37,15 +38,35 @@ export default function Header() {
         scrolled ? "shadow-md" : "shadow-sm"
       )}
     >
-      <div className="container-site flex items-center justify-between h-20">
+      {/* Top bar — dane kontaktowe */}
+      <div
+        className="hidden md:block text-xs py-2 border-b"
+        style={{ backgroundColor: "var(--brand-blue)", borderColor: "#1670bd" }}
+      >
+        <div className="container-site flex items-center justify-between text-white/90">
+          <span className="flex items-center gap-1.5">
+            <MapPin size={12} />
+            {PORADNIA.ulica}, {PORADNIA.kodMiasto}
+          </span>
+          <a
+            href={PORADNIA.telefonHref}
+            className="flex items-center gap-1.5 font-semibold hover:text-white transition-colors"
+          >
+            <Phone size={12} />
+            {PORADNIA.telefon}
+          </a>
+        </div>
+      </div>
+
+      <div className="container-site flex items-center justify-between h-24">
         <Link href="/" className="flex-shrink-0 flex items-center gap-2" aria-label="Kids Up — strona główna">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-header.png"
             alt="Kids Up — Niepubliczna Poradnia Psychologiczno-Pedagogiczna"
-            width={160}
-            height={160}
+            width={400}
+            height={390}
             priority
-            className="h-14 w-14 object-contain"
+            className="h-20 w-20 object-contain"
           />
         </Link>
 
@@ -103,9 +124,19 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
+              <div className="pt-3 pb-1 border-t border-gray-100 mt-2">
+                <a
+                  href={PORADNIA.telefonHref}
+                  className="flex items-center gap-2 py-3 px-4 font-bold text-sm"
+                  style={{ color: "var(--brand-blue)" }}
+                >
+                  <Phone size={16} />
+                  {PORADNIA.telefon}
+                </a>
+              </div>
               <Link
                 href="/kontakt"
-                className="btn-primary justify-center mt-3 mx-4"
+                className="btn-primary justify-center mt-1 mx-4"
               >
                 Umów wizytę
               </Link>

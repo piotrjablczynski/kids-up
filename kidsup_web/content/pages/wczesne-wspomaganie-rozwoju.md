@@ -3,14 +3,14 @@ meta_title: "Wczesne Wspomaganie Rozwoju (WWR) — Ząbki"
 meta_description: "Bezpłatne zajęcia wczesnego wspomagania rozwoju (WWR) dla dzieci z opinią poradni psychologiczno-pedagogicznej, finansowane z dotacji Starostwa Powiatowego w Wołominie."
 hero_tagline: "Nasza specjalizacja"
 hero_heading: "Wczesne Wspomaganie Rozwoju"
-hero_description: "Kompleksowe, zespołowe wsparcie dla najmłodszych dzieci z opóźnieniami lub zaburzeniami rozwoju — od diagnozy, przez opinię, po regularne zajęcia. Dla dzieci z opinią — bezpłatnie."
+hero_description: "Kompleksowe, zespołowe wsparcie dla najmłodszych dzieci z opóźnieniami lub zaburzeniami rozwoju — od wstępnej diagnozy, przez skierowanie po opinię, po regularne zajęcia. Dla dzieci z opinią — bezpłatnie."
 steps:
   - step: "01"
     title: "Zgłoszenie i konsultacja"
     desc: "Umawiasz się na konsultację — rozmawiamy o rozwoju dziecka i Twoich obserwacjach."
   - step: "02"
-    title: "Diagnoza i opinia"
-    desc: "Zespół specjalistów przeprowadza diagnozę i, jeśli to zasadne, wydaje opinię o potrzebie wczesnego wspomagania rozwoju (art. 127 Prawo oświatowe)."
+    title: "Wstępna diagnoza i skierowanie"
+    desc: "Nasz zespół przeprowadza wstępną diagnozę i, jeśli to zasadne, kieruje do publicznej poradni psychologiczno-pedagogicznej po formalną opinię o potrzebie wczesnego wspomagania rozwoju (art. 127 Prawo oświatowe)."
   - step: "03"
     title: "Zajęcia WWR"
     desc: "Rozpoczynamy regularne zajęcia zespołowe dopasowane do potrzeb dziecka — bezpłatnie, w ramach dotacji powiatowej."
@@ -27,10 +27,12 @@ przedszkolu czy szkole.
 ## Kto się kwalifikuje
 
 WWR jest dla dzieci, które mają **opinię o potrzebie wczesnego wspomagania
-rozwoju**, wydawaną na podstawie art. 127 ustawy — Prawo oświatowe. Opinię
-może wystawić poradnia psychologiczno-pedagogiczna po przeprowadzeniu
-diagnozy — również nasza. Jeśli Twoje dziecko jeszcze takiej opinii nie ma,
-umów się na konsultację diagnostyczną — pomożemy ją uzyskać.
+rozwoju**, wydawaną na podstawie art. 127 ustawy — Prawo oświatowe przez
+zespół orzekający działający w **publicznej** poradni psychologiczno-pedagogicznej.
+Jako poradnia niepubliczna sami takiej opinii nie wydajemy — ale
+przeprowadzimy wstępną diagnozę, pomożemy ocenić, czy ścieżka WWR jest
+zasadna, i skierujemy Cię do właściwej publicznej poradni po formalną
+opinię. Gdy już ją uzyskasz, same zajęcia WWR zrealizujesz u nas.
 
 ## Ile to kosztuje
 

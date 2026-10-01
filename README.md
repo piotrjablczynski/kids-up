@@ -72,6 +72,27 @@ Strona/
 7. **Zdjęcia** — wygeneruj brakujące zdjęcia z `Tools/image-prompts.txt` i
    wrzuć pod wskazane ścieżki w `kidsup_web/public/images/`.
 
-8. **Dane kontaktowe** — adres, telefon i godziny w
-   `kidsup_web/content/pages/kontakt.md` (i w stopce) są placeholderami
-   `[do uzupełnienia]` — uzupełnij je przed pójściem na produkcję.
+8. **Dane kontaktowe** (adres, telefon, e-mail, godziny) są już uzupełnione
+   realnymi danymi w Headerze, Footerze i `kidsup_web/content/pages/kontakt.md`
+   (`lib/poradniaInfo.ts` to jedno miejsce, gdzie je zmienić, jeśli się
+   zmienią).
+
+9. **Formularz kontaktowy** (`/kontakt`) wysyła e-mail przez SMTP
+   (`app/api/contact/route.ts`, biblioteka `nodemailer`) — wymaga sekretu
+   K8s `kidsup-contact-smtp` w namespace `test` i `prod` (nie ma go w
+   repo, trzeba założyć ręcznie, raz na namespace):
+   ```bash
+   kubectl create secret generic kidsup-contact-smtp \
+     --from-literal=smtp-host=smtp.twoj-dostawca.pl \
+     --from-literal=smtp-port=587 \
+     --from-literal=smtp-secure=false \
+     --from-literal=smtp-user=TWOJ_LOGIN_SMTP \
+     --from-literal=smtp-pass=TWOJE_HASLO_SMTP \
+     --from-literal=contact-to-email=info@kids-up.pl \
+     --from-literal=contact-from-email=info@kids-up.pl \
+     --namespace test   # powtórz z --namespace prod
+   ```
+   Dowolny dostawca SMTP działa (skrzynka pocztowa do domeny kids-up.pl,
+   Gmail z hasłem aplikacji, Resend/SendGrid/Mailgun przez ich SMTP
+   relay). Bez tego sekretu formularz pokazuje komunikat "chwilowo
+   niedostępny" zamiast się wywalać — strona działa dalej normalnie.

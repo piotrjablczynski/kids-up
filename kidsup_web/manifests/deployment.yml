@@ -25,6 +25,44 @@ spec:
           value: "3000"
         - name: HOSTNAME
           value: "0.0.0.0"
+        # Wysyłka formularza kontaktowego (app/api/contact/route.ts) — wszystkie
+        # wartości z K8s Secret "kidsup-contact-smtp" (namespace ${NAMESPACE}),
+        # zakładanego ręcznie, nie trzymanego w repo. Patrz README.md.
+        - name: SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: smtp-host
+        - name: SMTP_PORT
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: smtp-port
+        - name: SMTP_SECURE
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: smtp-secure
+        - name: SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: smtp-user
+        - name: SMTP_PASS
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: smtp-pass
+        - name: CONTACT_TO_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: contact-to-email
+        - name: CONTACT_FROM_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: kidsup-contact-smtp
+              key: contact-from-email
         ports:
         - containerPort: 3000
           name: http

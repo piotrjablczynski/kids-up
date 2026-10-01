@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
+import EmailImage from "@/components/ui/EmailImage";
+import { PORADNIA, ORGAN_PROWADZACY } from "@/lib/poradniaInfo";
 
 const navLinks = [
   { label: "O nas", href: "/o-nas" },
@@ -20,16 +22,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <div className="inline-block bg-white rounded-2xl px-3 py-2 mb-5">
-              <Image
-                src="/images/logo.png"
-                alt="Kids Up — Niepubliczna Poradnia Psychologiczno-Pedagogiczna"
-                width={160}
-                height={160}
-                className="h-16 w-16 object-contain"
-              />
-            </div>
-            <p className="text-gray-300 leading-relaxed text-sm mb-4">
+            <Image
+              src="/images/logo-footer.png"
+              alt="Kids Up — Niepubliczna Poradnia Psychologiczno-Pedagogiczna"
+              width={400}
+              height={390}
+              className="h-20 w-20 object-contain mb-5"
+            />
+            <p className="text-gray-300 leading-relaxed text-sm">
               Kids Up — Niepubliczna Poradnia Psychologiczno-Pedagogiczna w
               Ząbkach. Diagnoza, terapia i wczesne wspomaganie rozwoju dla
               dzieci — zespół specjalistów w jednym miejscu.
@@ -60,29 +60,57 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="text-brand-cyan mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">
-                  [adres do uzupełnienia]
+                  {PORADNIA.ulica}
                   <br />
-                  05-091 Ząbki
+                  {PORADNIA.kodMiasto}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-brand-cyan flex-shrink-0" />
-                <span className="text-gray-300 text-sm">[telefon do uzupełnienia]</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail size={16} className="text-brand-cyan flex-shrink-0" />
                 <a
-                  href="mailto:kontakt@kids-up.pl"
+                  href={PORADNIA.telefonHref}
                   className="text-gray-300 hover:text-brand-cyan transition-colors text-sm font-medium"
                 >
-                  kontakt@kids-up.pl
+                  {PORADNIA.telefon}
                 </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-brand-cyan flex-shrink-0"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <EmailImage variant="light" className="opacity-80 hover:opacity-100 transition-opacity" />
               </li>
               <li className="flex items-start gap-3">
                 <Clock size={16} className="text-brand-cyan mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">[godziny do uzupełnienia]</span>
+                <span className="text-gray-300 text-sm">{PORADNIA.godziny}</span>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Organ prowadzący */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
+            Organ prowadzący
+          </p>
+          <div className="flex flex-wrap gap-x-8 gap-y-1 text-xs text-gray-400">
+            <span>{ORGAN_PROWADZACY.nazwa}</span>
+            <span>NIP: <span className="text-gray-300">{ORGAN_PROWADZACY.nip}</span></span>
+            <span>REGON: <span className="text-gray-300">{ORGAN_PROWADZACY.regon}</span></span>
+            <span>KRS: <span className="text-gray-300">{ORGAN_PROWADZACY.krs}</span></span>
           </div>
         </div>
       </div>

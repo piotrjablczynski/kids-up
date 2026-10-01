@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
+import EmailImage from "@/components/ui/EmailImage";
+import ContactForm from "@/components/kontakt/ContactForm";
 import { getPageContent } from "@/lib/content";
+import { PORADNIA } from "@/lib/poradniaInfo";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -12,13 +15,7 @@ export const metadata: Metadata = {
 
 export default async function KontaktPage() {
   const page = await getPageContent("kontakt");
-
-  const details = [
-    { icon: MapPin, label: "Adres", value: (page?.address as string) ?? "" },
-    { icon: Phone, label: "Telefon", value: (page?.phone as string) ?? "" },
-    { icon: Mail, label: "E-mail", value: (page?.email as string) ?? "" },
-    { icon: Clock, label: "Godziny", value: (page?.hours as string) ?? "" },
-  ];
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(PORADNIA.mapsQuery)}&output=embed`;
 
   return (
     <>
@@ -31,78 +28,82 @@ export default async function KontaktPage() {
               <div className="prose-content mb-8" dangerouslySetInnerHTML={{ __html: page.content }} />
             )}
 
-            <div className="space-y-5">
-              {details.map((d) => (
-                <div key={d.label} className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
-                    <d.icon size={20} style={{ color: "var(--brand-blue)" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wide text-gray-400">{d.label}</p>
-                    <p className="text-dark font-semibold">{d.value}</p>
-                  </div>
+            <div className="space-y-5 mb-8">
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
+                  <MapPin size={20} style={{ color: "var(--brand-blue)" }} />
                 </div>
-              ))}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-gray-400">Adres</p>
+                  <p className="text-dark font-semibold">
+                    {PORADNIA.ulica}, {PORADNIA.kodMiasto}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
+                  <Phone size={20} style={{ color: "var(--brand-blue)" }} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-gray-400">Telefon</p>
+                  <a href={PORADNIA.telefonHref} className="text-dark font-semibold hover:text-brand-blue transition-colors">
+                    {PORADNIA.telefon}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--brand-blue)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-gray-400">E-mail</p>
+                  <EmailImage variant="dark" />
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
+                  <Clock size={20} style={{ color: "var(--brand-blue)" }} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-gray-400">Godziny</p>
+                  <p className="text-dark font-semibold">{PORADNIA.godziny}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-border shadow-card h-[280px]">
+              <iframe
+                src={mapSrc}
+                title={`Mapa — Kids Up, ${PORADNIA.mapsQuery}`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="bg-surface rounded-2xl p-8 border border-border">
+          <Reveal delay={0.1} className="bg-surface rounded-2xl p-8 border border-border h-fit">
             <h2 className="font-bold text-dark text-xl mb-6">Formularz kontaktowy</h2>
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-dark mb-1.5">
-                  Imię i nazwisko
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="w-full rounded-xl border border-border px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-blue"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-dark mb-1.5">
-                  E-mail
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full rounded-xl border border-border px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-blue"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-dark mb-1.5">
-                  Telefon
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  className="w-full rounded-xl border border-border px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-blue"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-dark mb-1.5">
-                  Wiadomość
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full rounded-xl border border-border px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-blue"
-                />
-              </div>
-              <button type="submit" className="btn-primary w-full justify-center">
-                Wyślij wiadomość
-              </button>
-              <p className="text-xs text-gray-400 text-center">
-                Formularz jest na razie makietą — podłączenie wysyłki (np. e-mail/API) zrobimy w kolejnym kroku.
-              </p>
-            </form>
+            <ContactForm />
           </Reveal>
         </div>
       </section>

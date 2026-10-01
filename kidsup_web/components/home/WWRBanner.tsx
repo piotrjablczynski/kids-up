@@ -23,7 +23,7 @@ export default function WWRBanner() {
                 <Star size={14} />
                 Nasza specjalizacja
               </span>
-              <h2 className="text-[clamp(1.6rem,3.5vw,2.4rem)] font-black leading-tight mb-4">
+              <h2 className="text-white text-[clamp(1.6rem,3.5vw,2.4rem)] font-black leading-tight mb-4">
                 Wczesne Wspomaganie Rozwoju — bezpłatnie dla dzieci z opinią
               </h2>
               <p className="text-white/90 text-lg leading-relaxed mb-8">
