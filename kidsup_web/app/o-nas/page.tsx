@@ -5,7 +5,7 @@ import { Reveal, RevealGroup } from "@/components/ui/Reveal";
 import { getPageContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "O nas — zespół Kids Up",
+  title: "O nas — Kids Up",
   description:
     "Poznaj Niepubliczną Poradnię Psychologiczno-Pedagogiczną Kids Up w Ząbkach — obszary wsparcia i podejście do pracy z dziećmi.",
 };
@@ -23,7 +23,7 @@ export default async function ONasPage() {
     <>
       <PageHero
         tagline={(page?.hero_tagline as string) ?? "Poznaj nas"}
-        heading={(page?.hero_heading as string) ?? "Zespół, który słucha i rozumie"}
+        heading={(page?.hero_heading as string) ?? "Poradnia, która słucha i rozumie"}
       />
 
       <section className="section-padding">

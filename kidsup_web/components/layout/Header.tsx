@@ -10,10 +10,10 @@ import { cn } from "@/lib/utils";
 import { PORADNIA } from "@/lib/poradniaInfo";
 
 const navLinks = [
-  { label: "O nas", href: "/o-nas" },
-  { label: "WWR", href: "/wczesne-wspomaganie-rozwoju", title: "Wczesne Wspomaganie Rozwoju" },
   { label: "Oferta", href: "/oferta" },
+  { label: "WWR", href: "/wczesne-wspomaganie-rozwoju", title: "Wczesne Wspomaganie Rozwoju" },
   { label: "Dla rodziców", href: "/dla-rodzicow" },
+  { label: "O nas", href: "/o-nas" },
   { label: "Cennik", href: "/cennik" },
   { label: "Kontakt", href: "/kontakt" },
 ];
