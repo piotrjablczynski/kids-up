@@ -74,27 +74,6 @@ collections:
       - { label: Powiązane usługi z oferty (slugi), name: relatedOferta, widget: list, required: false }
       - { label: Treść artykułu, name: body, widget: markdown }
 
-  # ─── Praca u nas (oferty pracy) ──────────────────────────────
-  - name: praca
-    label: Praca u nas
-    label_singular: Ogłoszenie
-    folder: content/praca
-    create: true
-    slug: "{{slug}}"
-    extension: md
-    format: frontmatter
-    identifier_field: role
-    summary: "{{role}} — {{status}}"
-    fields:
-      - { label: Stanowisko, name: role, widget: string }
-      - label: Status
-        name: status
-        widget: select
-        options: ["Pilnie poszukiwany", "Rekrutacja otwarta", "Rekrutacja uzupełniająca"]
-        default: "Rekrutacja otwarta"
-      - { label: Dopisek (np. o formie współpracy), name: note, widget: string, required: false }
-      - { label: Treść ogłoszenia, name: body, widget: markdown }
-
   # ─── Aktualności (na przyszłość) ─────────────────────────────
   - name: aktualnosci
     label: Aktualności
@@ -137,14 +116,13 @@ collections:
           - { label: Meta opis, name: meta_description, widget: text, required: false }
           - { label: Slogan, name: hero_tagline, widget: string, required: false }
           - { label: Nagłówek, name: hero_heading, widget: string, required: false }
-          - { label: Nagłówek sekcji zespołu, name: mission_heading, widget: string, required: false }
-          - label: Zespół
-            name: team
+          - { label: Nagłówek sekcji obszarów wsparcia, name: mission_heading, widget: string, required: false }
+          - label: Obszary wsparcia
+            name: expertise
             widget: list
             fields:
-              - { label: Rola, name: role, widget: string }
+              - { label: Obszar, name: role, widget: string }
               - { label: Opis, name: desc, widget: text }
-              - { label: Status, name: status, widget: select, options: ["W zespole od startu", "W trakcie rekrutacji"] }
           - { label: Treść, name: body, widget: markdown }
 
       - label: Wczesne Wspomaganie Rozwoju
@@ -184,6 +162,7 @@ collections:
           - { label: Slogan, name: hero_tagline, widget: string, required: false }
           - { label: Nagłówek, name: hero_heading, widget: string, required: false }
           - { label: Opis, name: hero_description, widget: text, required: false }
+          - { label: Specjalizacje, name: specjalizacje, widget: list, required: false }
           - { label: Treść, name: body, widget: markdown, required: false }
 
       - label: Cennik (intro)

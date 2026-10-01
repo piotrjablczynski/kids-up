@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, Clock3 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import { Reveal, RevealGroup } from "@/components/ui/Reveal";
 import { getPageContent } from "@/lib/content";
@@ -8,18 +7,17 @@ import { getPageContent } from "@/lib/content";
 export const metadata: Metadata = {
   title: "O nas — zespół Kids Up",
   description:
-    "Poznaj zespół Niepublicznej Poradni Psychologiczno-Pedagogicznej Kids Up w Ząbkach — psychologów, pedagogów, logopedów i terapeutów pracujących z dziećmi.",
+    "Poznaj Niepubliczną Poradnię Psychologiczno-Pedagogiczną Kids Up w Ząbkach — obszary wsparcia i podejście do pracy z dziećmi.",
 };
 
-interface TeamMember {
+interface ExpertiseArea {
   role: string;
   desc: string;
-  status: string;
 }
 
 export default async function ONasPage() {
   const page = await getPageContent("o-nas");
-  const team = (page?.team as TeamMember[] | undefined) ?? [];
+  const expertise = (page?.expertise as ExpertiseArea[] | undefined) ?? [];
 
   return (
     <>
@@ -39,29 +37,14 @@ export default async function ONasPage() {
       <section className="section-padding bg-surface">
         <div className="container-site">
           <Reveal className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="section-title">{(page?.mission_heading as string) ?? "Nasz zespół"}</h2>
+            <h2 className="section-title">{(page?.mission_heading as string) ?? "Obszary, w których wspieramy dzieci"}</h2>
           </Reveal>
 
           <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {team.map((member, i) => (
-              <Reveal key={member.role} delay={i * 0.06} className="bg-white rounded-2xl p-6 shadow-card border border-border">
-                <h3 className="font-bold text-dark mb-2">{member.role}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">{member.desc}</p>
-                <span
-                  className="badge-soft"
-                  style={
-                    member.status.toLowerCase().includes("od startu")
-                      ? { backgroundColor: "rgba(124,179,66,0.15)", color: "#4f7a1f" }
-                      : { backgroundColor: "rgba(30,136,229,0.12)", color: "var(--brand-blue)" }
-                  }
-                >
-                  {member.status.toLowerCase().includes("od startu") ? (
-                    <CheckCircle2 size={14} />
-                  ) : (
-                    <Clock3 size={14} />
-                  )}
-                  {member.status}
-                </span>
+            {expertise.map((area, i) => (
+              <Reveal key={area.role} delay={i * 0.06} className="bg-white rounded-2xl p-6 shadow-card border border-border">
+                <h3 className="font-bold text-dark mb-2">{area.role}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{area.desc}</p>
               </Reveal>
             ))}
           </RevealGroup>

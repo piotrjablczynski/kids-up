@@ -127,30 +127,6 @@ export async function getFeaturedTematy(): Promise<Temat[]> {
   return items.filter((i) => i.featured);
 }
 
-// ─── Praca u nas (oferty pracy) ─────────────────────────────────────────────
-
-export interface JobPosting {
-  slug: string;
-  role: string;
-  status: string;
-  note?: string;
-  content: string;
-}
-
-export async function getAllJobPostings(): Promise<JobPosting[]> {
-  const items = readCollection("praca");
-  const resolved = await Promise.all(
-    items.map(async ({ slug, data, content }) => ({
-      slug,
-      role: (data.role as string) ?? "",
-      status: (data.status as string) ?? "W trakcie rekrutacji",
-      note: data.note as string | undefined,
-      content: await markdownToHtml(content),
-    }))
-  );
-  return resolved;
-}
-
 // ─── Wczesne Wspomaganie Rozwoju (klaster artykułów) ────────────────────────
 
 export interface FaqItem {

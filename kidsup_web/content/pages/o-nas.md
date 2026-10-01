@@ -1,31 +1,22 @@
 ---
 meta_title: "O nas — zespół Kids Up"
-meta_description: "Poznaj zespół Niepublicznej Poradni Psychologiczno-Pedagogicznej Kids Up w Ząbkach — psychologów, pedagogów, logopedów i terapeutów pracujących z dziećmi."
+meta_description: "Poznaj Niepubliczną Poradnię Psychologiczno-Pedagogiczną Kids Up w Ząbkach — obszary wsparcia i podejście do pracy z dziećmi."
 hero_tagline: "Poznaj nas"
 hero_heading: "Zespół, który słucha i rozumie"
-mission_heading: "Nasze podejście"
-team:
-  - role: "Psycholog dziecięcy"
+mission_heading: "Obszary, w których wspieramy dzieci"
+expertise:
+  - role: "Psychologia dziecięca"
     desc: "Diagnoza psychologiczna, terapia dzieci, konsultacje z rodzicami."
-    status: "W zespole od startu"
-  - role: "Pedagog specjalny / terapeuta pedagogiczny"
+  - role: "Pedagogika specjalna"
     desc: "Diagnozy szkolne (dysleksja, dysgrafia, dyskalkulia), terapia pedagogiczna."
-    status: "W zespole od startu"
-  - role: "Logopeda"
-    desc: "Diagnoza i terapia wad wymowy, opóźnionego rozwoju mowy."
-    status: "W zespole od startu"
-  - role: "Terapeuta integracji sensorycznej / terapii ręki"
+  - role: "Logopedia i neurologopedia"
+    desc: "Diagnoza i terapia wad wymowy, opóźnionego rozwoju mowy, terapia neurologopedyczna."
+  - role: "Integracja sensoryczna i terapia ręki"
     desc: "Diagnoza i terapia SI, terapia ręki."
-    status: "W zespole od startu"
-  - role: "Neurologopeda"
-    desc: "Terapia neurologopedyczna, logopedia z elektrostymulacją."
-    status: "W trakcie rekrutacji"
-  - role: "Fizjoterapeuta dziecięcy"
-    desc: "Rehabilitacja ruchowa, docelowo integracja odruchów (INPP)."
-    status: "W trakcie rekrutacji"
-  - role: "Specjalista metody Johansena"
-    desc: "Indywidualna Stymulacja Słuchu."
-    status: "W trakcie rekrutacji"
+  - role: "Fizjoterapia dziecięca"
+    desc: "Rehabilitacja ruchowa, integracja odruchów."
+  - role: "Stymulacja słuchu metodą Johansena"
+    desc: "Indywidualna Stymulacja Słuchu (IAS)."
 ---
 
 W Kids Up wierzymy, że każde dziecko rozwija się we własnym tempie — a rolą
@@ -41,6 +32,4 @@ Powiatowego w Wołominie, czyli bezpłatnie dla rodzica.
 
 Zespół Kids Up budujemy świadomie — każdy specjalista ma realne kwalifikacje
 i certyfikaty w swojej dziedzinie, a nie tylko ogólne przygotowanie
-pedagogiczne. Poniżej widzisz, kto już z nami pracuje, a kogo jeszcze
-szukamy — jeśli znasz kogoś, kto pasowałby do zespołu, zajrzyj na stronę
-[Praca u nas](/praca-u-nas).
+pedagogiczne. Poniżej zobaczysz, w jakich obszarach zapewniamy wsparcie.
