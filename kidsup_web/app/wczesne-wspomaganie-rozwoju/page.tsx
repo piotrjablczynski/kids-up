@@ -3,12 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
 import { Reveal, RevealGroup } from "@/components/ui/Reveal";
-import { getPageContent } from "@/lib/content";
+import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/JsonLd";
+import { getPageContent, type FaqItem } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Wczesne Wspomaganie Rozwoju (WWR) — Ząbki",
   description:
-    "Bezpłatne zajęcia wczesnego wspomagania rozwoju (WWR) dla dzieci z opinią poradni psychologiczno-pedagogicznej, finansowane z dotacji Starostwa Powiatowego w Wołominie.",
+    "Czym jest wczesne wspomaganie rozwoju, dla kogo, kto wydaje opinię, ile kosztuje i jak zacząć — pełny przewodnik po WWR w Ząbkach i powiecie wołomińskim.",
 };
 
 interface Step {
@@ -20,9 +21,18 @@ interface Step {
 export default async function WWRPage() {
   const page = await getPageContent("wczesne-wspomaganie-rozwoju");
   const steps = (page?.steps as Step[] | undefined) ?? [];
+  const faq = (page?.faq as FaqItem[] | undefined) ?? [];
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Strona główna", path: "/" },
+          { name: "Wczesne Wspomaganie Rozwoju", path: "/wczesne-wspomaganie-rozwoju" },
+        ])}
+      />
+      {faq.length > 0 && <JsonLd data={faqJsonLd(faq)} />}
+
       <PageHero
         tagline={(page?.hero_tagline as string) ?? "Nasza specjalizacja"}
         heading={(page?.hero_heading as string) ?? "Wczesne Wspomaganie Rozwoju"}
@@ -65,12 +75,30 @@ export default async function WWRPage() {
                 alt="Zajęcia wczesnego wspomagania rozwoju w Kids Up"
                 width={480}
                 height={560}
-                className="rounded-[2rem] shadow-xl object-cover w-full h-[320px] lg:h-full"
+                className="rounded-[2rem] shadow-xl object-cover w-full h-[320px] lg:h-full sticky top-24"
               />
             </Reveal>
           </div>
         </div>
       </section>
+
+      {faq.length > 0 && (
+        <section className="section-padding bg-surface">
+          <div className="container-site max-w-3xl">
+            <Reveal className="text-center mb-12">
+              <h2 className="section-title">Najczęstsze pytania o WWR</h2>
+            </Reveal>
+            <RevealGroup className="space-y-4">
+              {faq.map((item, i) => (
+                <Reveal key={item.q} delay={i * 0.05} className="bg-white rounded-2xl p-6 shadow-card border border-border">
+                  <h3 className="font-bold text-dark mb-2">{item.q}</h3>
+                  <p className="text-gray-500 leading-relaxed">{item.a}</p>
+                </Reveal>
+              ))}
+            </RevealGroup>
+          </div>
+        </section>
+      )}
     </>
   );
 }

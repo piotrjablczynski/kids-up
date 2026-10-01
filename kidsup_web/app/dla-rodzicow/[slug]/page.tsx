@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
-import { getAllTematy, getTemat, getAllOfertaItems } from "@/lib/content";
+import { getAllTematy, getTemat, getAllOfertaItems, getAllWwrArticles } from "@/lib/content";
 
 export async function generateStaticParams() {
   const tematy = await getAllTematy();
@@ -34,8 +34,9 @@ export default async function TematDetailPage({
   const temat = await getTemat(slug);
   if (!temat) notFound();
 
-  const allOferta = await getAllOfertaItems();
+  const [allOferta, allWwr] = await Promise.all([getAllOfertaItems(), getAllWwrArticles()]);
   const related = allOferta.filter((o) => temat.relatedOferta?.includes(o.slug));
+  const relatedWwr = allWwr.filter((a) => temat.relatedWwr?.includes(a.slug));
 
   return (
     <>
@@ -75,8 +76,27 @@ export default async function TematDetailPage({
               </Link>
             </Reveal>
 
-            {related.length > 0 && (
+            {relatedWwr.length > 0 && (
               <Reveal delay={0.1} className="bg-surface rounded-2xl p-6 border border-border">
+                <h3 className="font-bold text-dark mb-3">Zobacz też</h3>
+                <ul className="space-y-2">
+                  {relatedWwr.map((a) => (
+                    <li key={a.slug}>
+                      <Link
+                        href={`/wczesne-wspomaganie-rozwoju/${a.slug}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+                      >
+                        {a.title}
+                        <ArrowRight size={14} />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
+
+            {related.length > 0 && (
+              <Reveal delay={0.15} className="bg-surface rounded-2xl p-6 border border-border">
                 <h3 className="font-bold text-dark mb-3">Powiązana oferta</h3>
                 <ul className="space-y-2">
                   {related.map((o) => (

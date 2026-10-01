@@ -8,6 +8,7 @@ icon: "Star"
 excerpt: "Zajęcia rozwojowe na tych samych zasadach merytorycznych co WWR — dla dzieci bez opinii lub ponad refundowany wymiar."
 featured: true
 relatedTematy: ["opozniony-rozwoj-psychoruchowy-niemowlat", "potrzeba-wczesnego-wspomagania-rozwoju"]
+relatedWwr: ["ile-kosztuje-wwr", "opinia-o-potrzebie-wwr"]
 ---
 ## Co to jest
 

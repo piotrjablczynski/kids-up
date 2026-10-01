@@ -8,6 +8,7 @@ icon: "Waves"
 excerpt: "Zajęcia poprawiające przetwarzanie bodźców zmysłowych przez zabawę ruchową."
 featured: true
 relatedTematy: ["nadwrazliwosc-sensoryczna"]
+relatedWwr: ["wwr-a-terapie-specjalistyczne"]
 ---
 ## Co to jest
 

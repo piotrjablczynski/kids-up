@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Clock, ArrowRight, ArrowLeft } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
-import { getAllOfertaItems, getOfertaItem, getAllTematy } from "@/lib/content";
+import { getAllOfertaItems, getOfertaItem, getAllTematy, getAllWwrArticles } from "@/lib/content";
 
 export async function generateStaticParams() {
   const items = await getAllOfertaItems();
@@ -34,8 +34,9 @@ export default async function OfertaDetailPage({
   const item = await getOfertaItem(slug);
   if (!item) notFound();
 
-  const allTematy = await getAllTematy();
+  const [allTematy, allWwr] = await Promise.all([getAllTematy(), getAllWwrArticles()]);
   const related = allTematy.filter((t) => item.relatedTematy?.includes(t.slug));
+  const relatedWwr = allWwr.filter((a) => item.relatedWwr?.includes(a.slug));
 
   return (
     <>
@@ -89,8 +90,27 @@ export default async function OfertaDetailPage({
               </Link>
             </Reveal>
 
-            {related.length > 0 && (
+            {relatedWwr.length > 0 && (
               <Reveal delay={0.1} className="bg-surface rounded-2xl p-6 border border-border">
+                <h3 className="font-bold text-dark mb-3">Powiązane z WWR</h3>
+                <ul className="space-y-2">
+                  {relatedWwr.map((a) => (
+                    <li key={a.slug}>
+                      <Link
+                        href={`/wczesne-wspomaganie-rozwoju/${a.slug}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+                      >
+                        {a.title}
+                        <ArrowRight size={14} />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
+
+            {related.length > 0 && (
+              <Reveal delay={0.15} className="bg-surface rounded-2xl p-6 border border-border">
                 <h3 className="font-bold text-dark mb-3">Powiązane tematy</h3>
                 <ul className="space-y-2">
                   {related.map((t) => (

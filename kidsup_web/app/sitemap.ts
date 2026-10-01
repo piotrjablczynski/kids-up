@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllOfertaItems, getAllTematy } from "@/lib/content";
+import { getAllOfertaItems, getAllTematy, getAllWwrArticles } from "@/lib/content";
 
 export const dynamic = "force-static";
 
@@ -34,5 +34,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...ofertaRoutes, ...tematyRoutes];
+  const wwrArticles = await getAllWwrArticles();
+  const wwrRoutes: MetadataRoute.Sitemap = wwrArticles.map((a) => ({
+    url: `${BASE_URL}/wczesne-wspomaganie-rozwoju/${a.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...ofertaRoutes, ...tematyRoutes, ...wwrRoutes];
 }

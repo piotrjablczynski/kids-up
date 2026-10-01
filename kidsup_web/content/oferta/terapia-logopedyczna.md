@@ -8,6 +8,7 @@ icon: "MessageCircle"
 excerpt: "Korekcja wad wymowy i praca nad rozwojem mowy dziecka."
 featured: false
 relatedTematy: ["wady-wymowy-u-dzieci", "opozniony-rozwoj-mowy"]
+relatedWwr: ["wwr-a-terapie-specjalistyczne"]
 ---
 ## Co to jest
 

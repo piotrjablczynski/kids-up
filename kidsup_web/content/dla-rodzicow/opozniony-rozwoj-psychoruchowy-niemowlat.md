@@ -4,6 +4,7 @@ excerpt: "Kamienie milowe rozwoju ruchowego niemowląt i kiedy warto skonsultowa
 icon: "Baby"
 featured: false
 relatedOferta: ["konsultacja-fizjoterapeutyczna", "fizjoterapia-dziecieca", "prywatne-zajecia-rozwojowe"]
+relatedWwr: ["pierwsze-sygnaly-u-niemowlat-i-malych-dzieci"]
 ---
 Każde dziecko rozwija się we własnym tempie, ale istnieją orientacyjne
 "kamienie milowe", które pomagają ocenić, czy rozwój ruchowy przebiega

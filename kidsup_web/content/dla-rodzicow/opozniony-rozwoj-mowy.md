@@ -4,6 +4,7 @@ excerpt: "Kiedy brak lub uboga mowa dziecka to jeszcze norma, a kiedy warto skon
 icon: "MessageCircle"
 featured: false
 relatedOferta: ["terapia-logopedyczna", "terapia-neurologopedyczna", "badanie-sluchowe-metoda-johansena"]
+relatedWwr: ["pierwsze-sygnaly-u-niemowlat-i-malych-dzieci"]
 ---
 Tempo rozwoju mowy bardzo różni się między dziećmi, ale są orientacyjne
 punkty, po których warto zgłosić się na konsultację: brak pierwszych słów

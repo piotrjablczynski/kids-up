@@ -8,6 +8,7 @@ icon: "HeartPulse"
 excerpt: "Regularna praca nad rozwojem ruchowym, napięciem mięśniowym i postawą."
 featured: false
 relatedTematy: ["opozniony-rozwoj-psychoruchowy-niemowlat"]
+relatedWwr: ["wwr-a-terapie-specjalistyczne"]
 ---
 ## Co to jest
 

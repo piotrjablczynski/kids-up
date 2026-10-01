@@ -20,6 +20,7 @@ export interface OfertaItem {
   excerpt: string;
   featured?: boolean;
   relatedTematy?: string[];
+  relatedWwr?: string[];
   content: string;
 }
 
@@ -30,6 +31,7 @@ export interface Temat {
   icon?: string;
   featured?: boolean;
   relatedOferta?: string[];
+  relatedWwr?: string[];
   content: string;
 }
 
@@ -74,6 +76,7 @@ export async function getAllOfertaItems(): Promise<OfertaItem[]> {
       excerpt: (data.excerpt as string) ?? "",
       featured: Boolean(data.featured),
       relatedTematy: (data.relatedTematy as string[] | undefined) ?? [],
+      relatedWwr: (data.relatedWwr as string[] | undefined) ?? [],
       content: await markdownToHtml(content),
     }))
   );
@@ -107,6 +110,7 @@ export async function getAllTematy(): Promise<Temat[]> {
       icon: data.icon as string | undefined,
       featured: Boolean(data.featured),
       relatedOferta: (data.relatedOferta as string[] | undefined) ?? [],
+      relatedWwr: (data.relatedWwr as string[] | undefined) ?? [],
       content: await markdownToHtml(content),
     }))
   );
@@ -145,6 +149,48 @@ export async function getAllJobPostings(): Promise<JobPosting[]> {
     }))
   );
   return resolved;
+}
+
+// ─── Wczesne Wspomaganie Rozwoju (klaster artykułów) ────────────────────────
+
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface WwrArticle {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  excerpt: string;
+  relatedWwr?: string[];
+  relatedOferta?: string[];
+  relatedTematy?: string[];
+  faq?: FaqItem[];
+  content: string;
+}
+
+export async function getAllWwrArticles(): Promise<WwrArticle[]> {
+  const items = readCollection("wwr");
+  const resolved = await Promise.all(
+    items.map(async ({ slug, data, content }) => ({
+      slug,
+      title: (data.title as string) ?? "",
+      metaDescription: (data.metaDescription as string) ?? "",
+      excerpt: (data.excerpt as string) ?? "",
+      relatedWwr: (data.relatedWwr as string[] | undefined) ?? [],
+      relatedOferta: (data.relatedOferta as string[] | undefined) ?? [],
+      relatedTematy: (data.relatedTematy as string[] | undefined) ?? [],
+      faq: (data.faq as FaqItem[] | undefined) ?? [],
+      content: await markdownToHtml(content),
+    }))
+  );
+  return resolved;
+}
+
+export async function getWwrArticle(slug: string): Promise<WwrArticle | null> {
+  const items = await getAllWwrArticles();
+  return items.find((i) => i.slug === slug) ?? null;
 }
 
 // ─── Strony statyczne ───────────────────────────────────────────────────────
