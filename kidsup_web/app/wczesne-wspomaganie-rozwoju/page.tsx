@@ -75,7 +75,7 @@ export default async function WWRPage() {
                 alt="Zajęcia wczesnego wspomagania rozwoju w Kids Up"
                 width={480}
                 height={560}
-                className="rounded-[2rem] shadow-xl object-cover w-full h-[320px] lg:h-full sticky top-24"
+                className="rounded-[2rem] shadow-xl object-cover w-full h-[320px] lg:h-[560px] sticky top-24"
               />
             </Reveal>
           </div>
