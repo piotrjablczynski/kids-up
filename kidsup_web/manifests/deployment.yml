@@ -28,41 +28,55 @@ spec:
         # Wysyłka formularza kontaktowego (app/api/contact/route.ts) — wszystkie
         # wartości z K8s Secret "kidsup-contact-smtp" (namespace ${NAMESPACE}),
         # zakładanego ręcznie, nie trzymanego w repo. Patrz README.md.
+        # `optional: true` jest tu kluczowe: route.ts już obsługuje brakujące
+        # zmienne (zwraca 503 z komunikatem "formularz niedostępny"), ale bez
+        # tej flagi kubelet odmawia wystartować cały kontener, gdy sekret nie
+        # istnieje (CreateContainerConfigError) — co utyka cały rollout i
+        # zostawia starą wersję strony (bez nowych zdjęć/treści) działającą
+        # w nieskończoność, bez żadnego widocznego błędu poza "brak sekretu"
+        # w logach poda.
         - name: SMTP_HOST
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: smtp-host
+              optional: true
         - name: SMTP_PORT
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: smtp-port
+              optional: true
         - name: SMTP_SECURE
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: smtp-secure
+              optional: true
         - name: SMTP_USER
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: smtp-user
+              optional: true
         - name: SMTP_PASS
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: smtp-pass
+              optional: true
         - name: CONTACT_TO_EMAIL
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: contact-to-email
+              optional: true
         - name: CONTACT_FROM_EMAIL
           valueFrom:
             secretKeyRef:
               name: kidsup-contact-smtp
               key: contact-from-email
+              optional: true
         ports:
         - containerPort: 3000
           name: http
