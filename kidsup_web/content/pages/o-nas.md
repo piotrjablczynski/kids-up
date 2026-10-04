@@ -1,5 +1,5 @@
 ---
-meta_title: "O nas — Kids Up"
+meta_title: "O nas"
 meta_description: "Poznaj Niepubliczną Poradnię Psychologiczno-Pedagogiczną Kids Up w Ząbkach — obszary wsparcia i podejście do pracy z dziećmi."
 hero_tagline: "Poznaj nas"
 hero_heading: "Poradnia, która słucha i rozumie"

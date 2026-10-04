@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${BASE_URL}/o-nas`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/wczesne-wspomaganie-rozwoju`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/tus`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/oferta`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/dla-rodzicow`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/cennik`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },

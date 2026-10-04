@@ -22,5 +22,5 @@ uspokoi — nie w trakcie wybuchu.
 Jeśli napady złości są bardzo częste, intensywne, obejmują agresję wobec
 innych lub siebie, albo utrudniają funkcjonowanie w przedszkolu czy
 szkole — warto skonsultować się z psychologiem. Dobrym uzupełnieniem
-indywidualnej terapii bywa też grupa TUS, w której dziecko ćwiczy nowe
-strategie w bezpiecznym, rówieśniczym środowisku.
+indywidualnej terapii bywa też grupa [TUS](/tus), w której dziecko ćwiczy
+nowe strategie w bezpiecznym, rówieśniczym środowisku.

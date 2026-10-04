@@ -21,4 +21,4 @@ cierpi, a nie tylko "jest ciche".
 Grupa Trening Pewności Siebie daje dziecku bezpieczną, małą przestrzeń do
 stopniowego oswajania kontaktu z innymi, we własnym tempie i bez presji.
 Dla dzieci z szerszymi trudnościami w relacjach dobrym uzupełnieniem bywa
-też Trening Umiejętności Społecznych (TUS).
+też [Trening Umiejętności Społecznych (TUS)](/tus).

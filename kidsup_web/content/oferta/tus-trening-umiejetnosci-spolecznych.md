@@ -25,3 +25,7 @@ wycofanych, impulsywnych lub łatwo wpadających w złość.
 Grupa spotyka się cyklicznie przez cały semestr w stałym składzie —
 regularność i stała grupa są kluczowe dla budowania nowych nawyków
 społecznych.
+
+Pełny przewodnik — czym jest TUS, dla kogo, jak wyglądają zajęcia i czego
+dziecko może się uczyć — znajdziesz na stronie [TUS — Trening Umiejętności
+Społecznych](/tus).

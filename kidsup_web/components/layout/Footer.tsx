@@ -7,6 +7,7 @@ import { PORADNIA, ORGAN_PROWADZACY } from "@/lib/poradniaInfo";
 const navLinks = [
   { label: "O nas", href: "/o-nas" },
   { label: "Wczesne Wspomaganie Rozwoju", href: "/wczesne-wspomaganie-rozwoju" },
+  { label: "TUS — Trening Umiejętności Społecznych", href: "/tus" },
   { label: "Oferta", href: "/oferta" },
   { label: "Dla rodziców", href: "/dla-rodzicow" },
   { label: "Cennik", href: "/cennik" },

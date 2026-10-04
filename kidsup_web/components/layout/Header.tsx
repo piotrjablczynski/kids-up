@@ -12,6 +12,7 @@ import { PORADNIA } from "@/lib/poradniaInfo";
 const navLinks = [
   { label: "Oferta", href: "/oferta" },
   { label: "WWR", href: "/wczesne-wspomaganie-rozwoju", title: "Wczesne Wspomaganie Rozwoju" },
+  { label: "TUS", href: "/tus", title: "Trening Umiejętności Społecznych" },
   { label: "Dla rodziców", href: "/dla-rodzicow" },
   { label: "O nas", href: "/o-nas" },
   { label: "Cennik", href: "/cennik" },

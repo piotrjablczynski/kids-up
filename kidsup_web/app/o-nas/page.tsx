@@ -5,7 +5,7 @@ import { Reveal, RevealGroup } from "@/components/ui/Reveal";
 import { getPageContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "O nas — Kids Up",
+  title: "O nas",
   description:
     "Poznaj Niepubliczną Poradnię Psychologiczno-Pedagogiczną Kids Up w Ząbkach — obszary wsparcia i podejście do pracy z dziećmi.",
 };

@@ -143,6 +143,58 @@ collections:
               - { label: Opis, name: desc, widget: text }
           - { label: Treść, name: body, widget: markdown }
 
+      - label: TUS (Trening Umiejętności Społecznych)
+        name: tus
+        file: content/pages/tus.md
+        fields:
+          - { label: Meta tytuł, name: meta_title, widget: string, required: false }
+          - { label: Meta opis, name: meta_description, widget: text, required: false }
+          - { label: Slogan, name: hero_tagline, widget: string, required: false }
+          - { label: Nagłówek, name: hero_heading, widget: string, required: false }
+          - { label: Opis, name: hero_description, widget: text, required: false }
+          - { label: "Dla kogo — lista punktów", name: dla_kogo, widget: list, required: false }
+          - { label: "Dla kogo — zastrzeżenie o diagnozie", name: dla_kogo_uwaga, widget: text, required: false }
+          - { label: "Czy tylko dla dzieci z diagnozą — nagłówek", name: diagnoza_heading, widget: string, required: false }
+          - { label: "Czy tylko dla dzieci z diagnozą — treść", name: diagnoza_text, widget: text, required: false }
+          - label: Kategorie umiejętności
+            name: kategorie_umiejetnosci
+            widget: list
+            required: false
+            fields:
+              - { label: Kategoria, name: category, widget: string }
+              - label: Ikona
+                name: icon
+                widget: select
+                options: [MessageCircle, Eye, Brain, Puzzle, Zap, ClipboardList, GraduationCap, PencilRuler, Calculator, Stethoscope, Waves, Activity, Ear, HeartPulse, FileText, Hand, Heart, Sparkles, Star, Users, Smile, Baby, BookOpen]
+              - { label: Elementy, name: items, widget: list }
+          - label: Przebieg zajęć — kroki
+            name: proces_kroki
+            widget: list
+            required: false
+            fields:
+              - { label: Numer, name: step, widget: string }
+              - { label: Tytuł, name: title, widget: string }
+              - { label: Opis, name: desc, widget: text }
+          - { label: "Motyw graficzny (widzi → próbuje → ...)", name: proces_motyw, widget: list, required: false }
+          - { label: "TUS to nie lekcja — przykładowe scenariusze", name: scenariusze, widget: list, required: false }
+          - label: "Jakie umiejętności można ćwiczyć — karty"
+            name: umiejetnosci_karty
+            widget: list
+            required: false
+            fields:
+              - { label: Tytuł, name: title, widget: string }
+              - { label: Opis, name: desc, widget: text }
+          - { label: "Kiedy warto porozmawiać — pytania", name: kiedy_rozmawiac_pytania, widget: list, required: false }
+          - { label: "Kiedy warto porozmawiać — podsumowanie", name: kiedy_rozmawiac_podsumowanie, widget: text, required: false }
+          - label: Pytania i odpowiedzi (FAQ)
+            name: faq
+            widget: list
+            required: false
+            fields:
+              - { label: Pytanie, name: q, widget: string }
+              - { label: Odpowiedź, name: a, widget: text }
+          - { label: Treść (sekcje opisowe), name: body, widget: markdown }
+
       - label: Kontakt
         name: kontakt
         file: content/pages/kontakt.md
