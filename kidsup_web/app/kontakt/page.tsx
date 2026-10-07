@@ -3,7 +3,6 @@ import { MapPin, Phone, Clock } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import EmailImage from "@/components/ui/EmailImage";
-import ContactForm from "@/components/kontakt/ContactForm";
 import { getPageContent } from "@/lib/content";
 import { PORADNIA } from "@/lib/poradniaInfo";
 
@@ -22,7 +21,7 @@ export default async function KontaktPage() {
       <PageHero tagline="Skontaktuj się" heading="Kontakt" />
 
       <section className="section-padding">
-        <div className="container-site grid lg:grid-cols-2 gap-12">
+        <div className="container-site max-w-2xl mx-auto">
           <Reveal>
             {page?.content && (
               <div className="prose-content mb-8" dangerouslySetInnerHTML={{ __html: page.content }} />
@@ -99,11 +98,6 @@ export default async function KontaktPage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          </Reveal>
-
-          <Reveal delay={0.1} className="bg-surface rounded-2xl p-8 border border-border h-fit">
-            <h2 className="font-bold text-dark text-xl mb-6">Formularz kontaktowy</h2>
-            <ContactForm />
           </Reveal>
         </div>
       </section>
