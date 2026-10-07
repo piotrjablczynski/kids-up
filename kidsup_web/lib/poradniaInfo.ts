@@ -11,6 +11,7 @@ export const PORADNIA = {
   email: "info@kids-up.pl",
   godziny: "Pon–Pt: 8:00–19:00",
   mapsQuery: "ul. Powstańców 34, 05-091 Ząbki",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61594989488525",
 };
 
 export const ORGAN_PROWADZACY = {

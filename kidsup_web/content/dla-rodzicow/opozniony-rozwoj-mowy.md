@@ -3,7 +3,7 @@ title: "Opóźniony rozwój mowy"
 excerpt: "Kiedy brak lub uboga mowa dziecka to jeszcze norma, a kiedy warto skonsultować się ze specjalistą."
 icon: "MessageCircle"
 featured: false
-relatedOferta: ["terapia-logopedyczna", "terapia-neurologopedyczna", "badanie-sluchowe-metoda-johansena"]
+relatedOferta: ["terapia-logopedyczna", "terapia-neurologopedyczna"]
 relatedWwr: ["pierwsze-sygnaly-u-niemowlat-i-malych-dzieci"]
 ---
 Tempo rozwoju mowy bardzo różni się między dziećmi, ale są orientacyjne

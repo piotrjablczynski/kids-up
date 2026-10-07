@@ -55,7 +55,17 @@ export default async function CennikPage() {
                       <h3 className="font-bold text-gray-500 text-sm uppercase tracking-wide mb-3">{subcat}</h3>
                     )}
                     <div className="overflow-hidden rounded-2xl border border-border">
-                      <table className="w-full text-sm">
+                      {/* table-fixed + colgroup: without it, each subcategory's table
+                          auto-sizes its own columns from only its own rows, so the
+                          duration/price columns land at a different x-position in
+                          every section. Fixed, shared column widths keep them
+                          aligned the same way on every table on the page. */}
+                      <table className="w-full text-sm table-fixed">
+                        <colgroup>
+                          <col />
+                          <col className="w-[170px]" />
+                          <col className="w-[140px]" />
+                        </colgroup>
                         <tbody>
                           {subItems.map((item, idx) => (
                             <tr
@@ -67,7 +77,7 @@ export default async function CennikPage() {
                                   {item.title}
                                 </Link>
                               </td>
-                              <td className="py-3.5 px-5 text-gray-400 whitespace-nowrap hidden sm:table-cell">
+                              <td className="py-3.5 px-5 text-gray-400 hidden sm:table-cell">
                                 {item.duration ?? "—"}
                               </td>
                               <td className="py-3.5 px-5 font-bold text-right whitespace-nowrap" style={{ color: "var(--brand-blue)" }}>

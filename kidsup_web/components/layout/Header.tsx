@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PORADNIA } from "@/lib/poradniaInfo";
+import { FacebookIcon } from "@/components/ui/FacebookIcon";
 
 const navLinks = [
   { label: "Oferta", href: "/oferta" },
@@ -49,13 +50,24 @@ export default function Header() {
             <MapPin size={12} />
             {PORADNIA.ulica}, {PORADNIA.kodMiasto}
           </span>
-          <a
-            href={PORADNIA.telefonHref}
-            className="flex items-center gap-1.5 font-semibold hover:text-white transition-colors"
-          >
-            <Phone size={12} />
-            {PORADNIA.telefon}
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href={PORADNIA.telefonHref}
+              className="flex items-center gap-1.5 font-semibold hover:text-white transition-colors"
+            >
+              <Phone size={12} />
+              {PORADNIA.telefon}
+            </a>
+            <a
+              href={PORADNIA.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Kids Up na Facebooku"
+              className="flex items-center justify-center w-6 h-6 rounded-full bg-white/15 hover:bg-white/25 hover:scale-110 transition-all duration-150"
+            >
+              <FacebookIcon size={13} />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -125,7 +137,7 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-3 pb-1 border-t border-gray-100 mt-2">
+              <div className="pt-3 pb-1 border-t border-gray-100 mt-2 flex items-center justify-between">
                 <a
                   href={PORADNIA.telefonHref}
                   className="flex items-center gap-2 py-3 px-4 font-bold text-sm"
@@ -133,6 +145,16 @@ export default function Header() {
                 >
                   <Phone size={16} />
                   {PORADNIA.telefon}
+                </a>
+                <a
+                  href={PORADNIA.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Kids Up na Facebooku"
+                  className="flex items-center justify-center w-9 h-9 rounded-full mr-4 text-white"
+                  style={{ backgroundColor: "var(--brand-blue)" }}
+                >
+                  <FacebookIcon size={16} />
                 </a>
               </div>
               <Link
