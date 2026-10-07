@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
+import OpeningAnnouncement from "@/components/home/OpeningAnnouncement";
 import USPSection from "@/components/home/USPSection";
 import WWRBanner from "@/components/home/WWRBanner";
 import OfertaCategories from "@/components/home/OfertaCategories";
@@ -20,6 +21,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <OpeningAnnouncement text={home?.opening_banner as string | undefined} />
       <Hero
         tagline={(home?.hero_tagline as string) ?? "Poradnia psychologiczno-pedagogiczna w Ząbkach"}
         heading={(home?.hero_heading as string) ?? "Rozwój Twojego dziecka"}

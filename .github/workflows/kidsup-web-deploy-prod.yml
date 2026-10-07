@@ -83,3 +83,15 @@ jobs:
           kubectl apply -f "$TMP/ingress-www.yml" -n $NAMESPACE
           kubectl apply -f "$TMP/deployment.yml"  -n $NAMESPACE
           kubectl rollout status deployment/kidsupweb -n $NAMESPACE --timeout=180s
+
+      # Tells Bing (and Yandex/Seznam.cz/Naver, which also adopted IndexNow)
+      # about every URL in the live sitemap right after a confirmed-successful
+      # rollout, instead of waiting for their next scheduled crawl. The key
+      # isn't a secret - it's the same value published at
+      # public/<key>.txt, IndexNow's own verification mechanism - so it's
+      # fine inline here rather than needing a new repo secret. Google
+      # doesn't use IndexNow; it re-fetches sitemap.xml on its own once
+      # submitted in Search Console (one-time, manual, see README.md).
+      - name: Notify IndexNow (Bing instant indexing)
+        working-directory: kidsup_web
+        run: node scripts/ping-indexnow.mjs https://kids-up.pl 5e0bfa92e0746cb2a2b08d7d264bcce7

@@ -107,6 +107,7 @@ collections:
           - { label: "Hero — nagłówek", name: hero_heading, widget: string, required: false }
           - { label: "Hero — wyróżniony fragment nagłówka", name: hero_heading_highlight, widget: string, required: false }
           - { label: "Hero — opis", name: hero_description, widget: text, required: false }
+          - { label: "Baner startowy (np. data otwarcia) — puste pole = brak banera", name: opening_banner, widget: string, required: false }
 
       - label: O nas
         name: o-nas

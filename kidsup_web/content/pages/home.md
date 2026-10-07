@@ -5,4 +5,5 @@ hero_tagline: "Poradnia psychologiczno-pedagogiczna w Ząbkach"
 hero_heading: "Rozwój Twojego dziecka"
 hero_heading_highlight: "w dobrych rękach"
 hero_description: "Diagnoza, terapia i wczesne wspomaganie rozwoju dla dzieci w jednym miejscu — zespół psychologów, pedagogów, logopedów i fizjoterapeutów blisko domu, w Ząbkach."
+opening_banner: "Otwieramy się 2 listopada 2026 — zapisz dziecko już teraz"
 ---

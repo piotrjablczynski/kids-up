@@ -96,3 +96,46 @@ Strona/
    Gmail z hasłem aplikacji, Resend/SendGrid/Mailgun przez ich SMTP
    relay). Bez tego sekretu formularz pokazuje komunikat "chwilowo
    niedostępny" zamiast się wywalać — strona działa dalej normalnie.
+
+10. **Indeksowanie przez Google/Bing — stan na dziś i co jeszcze wymaga
+    ręcznego kroku.**
+
+    **Krytyczne:** `kids-up.pl` (prod) jeszcze nigdy nie było wdrożone —
+    DNS i certyfikat (`kids-up-tls`) są gotowe w namespace `prod`, ale nie
+    ma tam żadnego deploymentu/ingressu, więc domena realnie nic nie
+    serwuje (sprawdzone `kubectl`/`curl` 2026-10-07). Żadna wyszukiwarka
+    nie zaindeksuje strony, która nie istnieje publicznie — zanim
+    cokolwiek inne z tej listy ma sens, trzeba wykonać punkt 5 powyżej
+    (ręczne odpalenie **Kids Up Web Deploy Production**).
+
+    Po pierwszym wdrożeniu na `kids-up.pl`:
+    - **Sitemap jest już w pełni automatyczny** — `app/sitemap.ts`
+      odkrywa każdą statyczną stronę (`page.tsx`) prosto z systemu plików
+      (`lib/routes.ts`), więc nowa strona (np. `app/nowa-strona/page.tsx`)
+      trafia do sitemapy sama, bez edycji `sitemap.ts`. Strony oparte na
+      treści (`/oferta/[slug]`, `/dla-rodzicow/[slug]`,
+      `/wczesne-wspomaganie-rozwoju/[slug]`) były automatyczne już
+      wcześniej — nowy plik `.md` w `content/` też trafia do sitemapy
+      sam. `app/robots.ts` (na `prod`) już wskazuje na
+      `https://kids-up.pl/sitemap.xml`.
+    - **Google Search Console** (jednorazowo, wymaga Twojego konta
+      Google): [search.google.com/search-console](https://search.google.com/search-console) →
+      dodaj właściwość `kids-up.pl` → zweryfikuj (DNS TXT jest najprostszy,
+      bez zmiany kodu) → Sitemaps → wklej `https://kids-up.pl/sitemap.xml`.
+      Po tym Google sam, regularnie, odpytuje sitemapę — nie trzeba nic
+      więcej robić przy każdej nowej stronie.
+    - **Bing Webmaster Tools** (jednorazowo, wymaga konta Microsoft):
+      [bing.com/webmasters](https://www.bing.com/webmasters) → najszybsza
+      opcja to "Import from Google Search Console" (jedno kliknięcie,
+      przenosi weryfikację i sitemapę od razu) — albo ręcznie dodaj
+      `kids-up.pl` i tę samą sitemapę.
+    - **IndexNow (Bing) jest już zautomatyzowany** — każdy udany deploy na
+      `kids-up.pl` (`kidsup-web-deploy-prod.yml`) na końcu odpytuje
+      `api.indexnow.org` z pełną listą adresów z sitemapy
+      (`kidsup_web/scripts/ping-indexnow.mjs`), więc Bing (i Yandex/
+      Seznam.cz/Naver, które też przyjęły ten protokół) dostaje informację
+      o nowej/zmienionej treści natychmiast, bez czekania na własne
+      zaplanowane odwiedziny crawlera. Klucz weryfikacyjny jest publiczny
+      z definicji (plik `public/<key>.txt`) — nie jest sekretem, stąd jest
+      wpisany bezpośrednio w workflow. Google w IndexNow nie uczestniczy —
+      dla Google liczy się tylko sitemapa + Search Console powyżej.
